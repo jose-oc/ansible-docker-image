@@ -20,3 +20,6 @@ RUN apt-get --quiet update && \
 RUN add-apt-repository --yes --update ppa:ansible/ansible
 RUN apt-get --quiet --yes install ansible
 RUN apt-get clean all
+
+# install python dependencies that I need for ansible
+RUN pip install --upgrade pip kubernetes kubernetes-validate
