@@ -28,8 +28,11 @@ docker run -it --rm \
 -w /work \
 -v `pwd`:/work \
 --mount type=bind,source=$HOME/.ansible/vault_pass,target=/root/.ansible/vault_pass,readonly \
+-v $HOME/.config/gcloud:/root/.config/gcloud:ro \
 -v $HOME/.ssh/ansible_id_rsa:/root/.ssh/ansible_id_rsa:ro \
 -v $HOME/.ssh/ansible_id_rsa.pub:/root/.ssh/ansible_id_rsa.pub:ro \
+-v $HOME/.ssh/id_ed25519_nepgpe:/root/.ssh/id_ed25519_nepgpe:ro \
+-v $HOME/.ssh/id_ed25519_nepgpe.pub:/root/.ssh/id_ed25519_nepgpe.pub:ro \
 jose-oc/ansible:ubuntu
 ```
 
@@ -44,7 +47,7 @@ For instance, you can't run `ansible-playbook -i inventory.yml install_python_de
 If you opt for this way, you can create some aliases on your shell:
 
 ```sh
-alias ansible-run='docker run --rm -it -w /work -v `pwd`:/work -v $HOME/.ssh/ansible_id_rsa.pub:/root/.ssh/ansible_id_rsa.pub:ro -v $HOME/.ssh/ansible_id_rsa:/root/.ssh/ansible_id_rsa:ro -v $HOME/.ansible/vault_pass:/root/.ansible/vault_pass:ro jose-oc/ansible:ubuntu' 
+alias ansible-run='docker run --rm -it -w /work -v `pwd`:/work -v $HOME/.config/gcloud:/root/.config/gcloud:ro -v $HOME/.ssh/id_ed25519_nepgpe.pub:/root/.ssh/id_ed25519_nepgpe.pub:ro -v $HOME/.ssh/id_ed25519_nepgpe:/root/.ssh/id_ed25519_nepgpe:ro -v $HOME/.ssh/ansible_id_rsa.pub:/root/.ssh/ansible_id_rsa.pub:ro -v $HOME/.ssh/ansible_id_rsa:/root/.ssh/ansible_id_rsa:ro -v $HOME/.ansible/vault_pass:/root/.ansible/vault_pass:ro -v $HOME/.kube:/root/.kube:ro jose-oc/ansible:ubuntu'  
 
 alias ansible-playbook='docker run --rm -it -w /work -v `pwd`:/work -v $HOME/.ssh/ansible_id_rsa.pub:/root/.ssh/ansible_id_rsa.pub:ro -v $HOME/.ssh/ansible_id_rsa:/root/.ssh/ansible_id_rsa:ro -v $HOME/.ansible/vault_pass:/root/.ansible/vault_pass:ro jose-oc/ansible:ubuntu ansible-playbook'
 
