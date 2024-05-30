@@ -22,8 +22,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag ${{ env.IMAGE_NAME }}:$(date +%s)
+    # - name: Build the Docker image
+    #   run: docker build . --file Dockerfile --tag ${{ env.IMAGE_NAME }}:$(date +%s)
 
     - name: Docker meta
       id: meta
