@@ -11,7 +11,7 @@ There are two flavors, one based on ubuntu and another one based on alpine.
 Build the docker image with a command like:
 
 ```sh
-docker build --tag jose-oc/ansible:ubuntu -f Dockerfile .
+docker build --tag joseoc/ansible-ubuntu:latest -f Dockerfile .
 ```
 
 ### Usage
@@ -33,7 +33,7 @@ docker run -it --rm \
 -v $HOME/.ssh/ansible_id_rsa.pub:/root/.ssh/ansible_id_rsa.pub:ro \
 -v $HOME/.ssh/id_ed25519_nepgpe:/root/.ssh/id_ed25519_nepgpe:ro \
 -v $HOME/.ssh/id_ed25519_nepgpe.pub:/root/.ssh/id_ed25519_nepgpe.pub:ro \
-jose-oc/ansible:ubuntu
+joseoc/ansible-ubuntu:latest
 ```
 
 #### Single command use
@@ -47,11 +47,11 @@ For instance, you can't run `ansible-playbook -i inventory.yml install_python_de
 If you opt for this way, you can create some aliases on your shell:
 
 ```sh
-alias ansible-run='docker run --rm -it -w /work -v `pwd`:/work -v $HOME/.config/gcloud:/root/.config/gcloud:ro -v $HOME/.ssh/id_ed25519_nepgpe.pub:/root/.ssh/id_ed25519_nepgpe.pub:ro -v $HOME/.ssh/id_ed25519_nepgpe:/root/.ssh/id_ed25519_nepgpe:ro -v $HOME/.ssh/ansible_id_rsa.pub:/root/.ssh/ansible_id_rsa.pub:ro -v $HOME/.ssh/ansible_id_rsa:/root/.ssh/ansible_id_rsa:ro -v $HOME/.ansible/vault_pass:/root/.ansible/vault_pass:ro -v $HOME/.kube:/root/.kube:ro jose-oc/ansible:ubuntu'  
+alias ansible-run='docker run --rm -it -w /work -v `pwd`:/work -v $HOME/.config/gcloud:/root/.config/gcloud:ro -v $HOME/.ssh/id_ed25519_nepgpe.pub:/root/.ssh/id_ed25519_nepgpe.pub:ro -v $HOME/.ssh/id_ed25519_nepgpe:/root/.ssh/id_ed25519_nepgpe:ro -v $HOME/.ssh/ansible_id_rsa.pub:/root/.ssh/ansible_id_rsa.pub:ro -v $HOME/.ssh/ansible_id_rsa:/root/.ssh/ansible_id_rsa:ro -v $HOME/.ansible/vault_pass:/root/.ansible/vault_pass:ro -v $HOME/.kube:/root/.kube:ro joseoc/ansible-ubuntu:latest'  
 
-alias ansible-playbook='docker run --rm -it -w /work -v `pwd`:/work -v $HOME/.ssh/ansible_id_rsa.pub:/root/.ssh/ansible_id_rsa.pub:ro -v $HOME/.ssh/ansible_id_rsa:/root/.ssh/ansible_id_rsa:ro -v $HOME/.ansible/vault_pass:/root/.ansible/vault_pass:ro jose-oc/ansible:ubuntu ansible-playbook'
+alias ansible-playbook='docker run --rm -it -w /work -v `pwd`:/work -v $HOME/.ssh/ansible_id_rsa.pub:/root/.ssh/ansible_id_rsa.pub:ro -v $HOME/.ssh/ansible_id_rsa:/root/.ssh/ansible_id_rsa:ro -v $HOME/.ansible/vault_pass:/root/.ansible/vault_pass:ro joseoc/ansible-ubuntu:latest ansible-playbook'
 
-alias ansible-vault='docker run --rm -it -w /work -v $HOME/.ansible/vault_pass:/root/.ansible/vault_pass:ro -e ANSIBLE_VAULT_PASSWORD_FILE=/root/.ansible/vault_pass jose-oc/ansible:ubuntu ansible-vault'
+alias ansible-vault='docker run --rm -it -w /work -v $HOME/.ansible/vault_pass:/root/.ansible/vault_pass:ro -e ANSIBLE_VAULT_PASSWORD_FILE=/root/.ansible/vault_pass joseoc/ansible-ubuntu:latest ansible-vault'
 ```
 
 Example of running this:
@@ -72,7 +72,7 @@ ansible-run
 Build the docker image with a command like:
 
 ```sh
-docker build --tag jose-oc/ansible:alpine-3.19 -f Dockerfile.alpine .
+docker build --tag joseoc/ansible:alpine-3.19 -f Dockerfile.alpine .
 ```
 
 ### Usage
@@ -91,7 +91,7 @@ docker run -it --rm \
 -v $HOME/.ssh/ansible_id_rsa:/root/.ssh/ansible_id_rsa:ro \
 --mount type=bind,source=$HOME/.ansible/vault_pass,target=/root/.ansible/vault_pass,readonly \
 --entrypoint=/bin/sh \
-jose-oc/ansible:alpine-3.19
+joseoc/ansible:alpine-3.19
 ```
 
 #### Single command use
@@ -105,11 +105,11 @@ For instance, you can't run `ansible-playbook -i inventory.yml install_python_de
 If you opt for this way, you can create some aliases on your shell:
 
 ```sh
-alias ansible-run='docker run --rm -it -w /work -v `pwd`:/work -v $HOME/.ssh/ansible_id_rsa.pub:/root/.ssh/ansible_id_rsa.pub:ro -v $HOME/.ssh/ansible_id_rsa:/root/.ssh/ansible_id_rsa:ro -v $HOME/.ansible/vault_pass:/root/.ansible/vault_pass:ro jose-oc/ansible:alpine-3.19' 
+alias ansible-run='docker run --rm -it -w /work -v `pwd`:/work -v $HOME/.ssh/ansible_id_rsa.pub:/root/.ssh/ansible_id_rsa.pub:ro -v $HOME/.ssh/ansible_id_rsa:/root/.ssh/ansible_id_rsa:ro -v $HOME/.ansible/vault_pass:/root/.ansible/vault_pass:ro joseoc/ansible:alpine-3.19' 
 
-alias ansible-playbook='docker run --rm -it -w /work -v `pwd`:/work -v $HOME/.ssh/ansible_id_rsa.pub:/root/.ssh/ansible_id_rsa.pub:ro -v $HOME/.ssh/ansible_id_rsa:/root/.ssh/ansible_id_rsa:ro -v $HOME/.ansible/vault_pass:/root/.ansible/vault_pass:ro -v $HOME/.kube:/root/.kube:ro jose-oc/ansible:ubuntu ansible-playbook'
+alias ansible-playbook='docker run --rm -it -w /work -v `pwd`:/work -v $HOME/.ssh/ansible_id_rsa.pub:/root/.ssh/ansible_id_rsa.pub:ro -v $HOME/.ssh/ansible_id_rsa:/root/.ssh/ansible_id_rsa:ro -v $HOME/.ansible/vault_pass:/root/.ansible/vault_pass:ro -v $HOME/.kube:/root/.kube:ro joseoc/ansible-ubuntu:latest ansible-playbook'
 
-alias ansible-vault='docker run --rm -it -w /work -v $HOME/.ansible/vault_pass:/root/.ansible/vault_pass:ro -e ANSIBLE_VAULT_PASSWORD_FILE=/root/.ansible/vault_pass jose-oc/ansible:alpine-3.19 ansible-vault'
+alias ansible-vault='docker run --rm -it -w /work -v $HOME/.ansible/vault_pass:/root/.ansible/vault_pass:ro -e ANSIBLE_VAULT_PASSWORD_FILE=/root/.ansible/vault_pass joseoc/ansible:alpine-3.19 ansible-vault'
 ```
 
 Example of running this:
