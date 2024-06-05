@@ -10,10 +10,11 @@ RUN apt-get --quiet update && \
 		curl \
 		openssh-client \
 		git \
+        jq \
 		python3 \
 		python3-pip \
 		python-is-python3 \
-    software-properties-common \
+        software-properties-common \
  		sshpass \
 		unzip
 
