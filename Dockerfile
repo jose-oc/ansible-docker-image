@@ -7,16 +7,16 @@ ENV USER="root"
 RUN apt-get --quiet update && \
     apt-get --quiet --yes upgrade && \
     apt-get --quiet --yes install \
-		curl \
-		openssh-client \
-		git \
+        curl \
+        openssh-client \
+        git \
         jq \
-		python3 \
-		python3-pip \
-		python-is-python3 \
+        python3 \
+        python3-pip \
+        python-is-python3 \
         software-properties-common \
- 		sshpass \
-		unzip
+        sshpass \
+        unzip
 
 # Install Ansible
 RUN add-apt-repository --yes --update ppa:ansible/ansible
